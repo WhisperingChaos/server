@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/WhisperingChaos/termChan"
 
@@ -83,7 +84,7 @@ func manageNewServers(opts Opts) (start func(), shutdown func()) {
 		go func() {
 			<-startHTTP.Chan()
 			close(startHTTP.Chan())
-			var url = opts.RootURL + ":" + string(opts.Port)
+			var url = opts.RootURL + ":" + strconv.Itoa(int(opts.Port))
 			serverHttp = &http.Server{Handler: mux, Addr: url}
 			dbg.Println("Started HTTP listner on:" + url)
 			serverHttp.ListenAndServe()
@@ -97,7 +98,7 @@ func manageNewServers(opts Opts) (start func(), shutdown func()) {
 		go func() {
 			<-startTLS.Chan()
 			close(startTLS.Chan())
-			var urlTLS = opts.RootURL + ":" + string(opts.PortTLS)
+			var urlTLS = opts.RootURL + ":" + strconv.Itoa(int(opts.PortTLS))
 			serverTLS = &http.Server{
 				TLSConfig: &tls.Config{
 					ClientAuth: opts.ClientAuth,

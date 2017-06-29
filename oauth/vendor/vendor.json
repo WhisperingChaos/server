@@ -1,0 +1,43 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "bF1CizAnpp2hwPo/C+u0B4+1l0w=",
+			"path": "github.com/RangelReale/osin",
+			"revision": "1c1df84c02772e026c72214a50ad7729f698e8b0",
+			"revisionTime": "2017-06-16T13:14:14Z"
+		},
+		{
+			"checksumSHA1": "QOKeoyMn+R/VSgSiHfjTPq3uWHg=",
+			"path": "github.com/RangelReale/osin/example",
+			"revision": "1c1df84c02772e026c72214a50ad7729f698e8b0",
+			"revisionTime": "2017-06-16T13:14:14Z"
+		},
+		{
+			"checksumSHA1": "h9nUT4fLV2kTL/ism42hvLHkVg0=",
+			"path": "github.com/WhisperingChaos/server/simple",
+			"revision": "d0885a5c5a85757b8bb9cb90365270517d46c682",
+			"revisionTime": "2017-06-29T15:31:11Z"
+		},
+		{
+			"checksumSHA1": "ylkVQq0hYr4J8kOhUJ1u9AbFZrY=",
+			"path": "github.com/WhisperingChaos/termChan",
+			"revision": "dc7162996cba25fe374a060a6adb666e74eec856",
+			"revisionTime": "2017-05-02T02:26:22Z"
+		},
+		{
+			"checksumSHA1": "kKKbY4j5CPqs3Efl7KYvbB22elI=",
+			"path": "github.com/WhisperingChaos/terminator",
+			"revision": "341298b1e724becc7ee5dba93f31d6f627359a61",
+			"revisionTime": "2017-04-26T16:04:33Z"
+		},
+		{
+			"checksumSHA1": "Se195FlZ160eaEk/uVx4KdTPSxU=",
+			"path": "github.com/pborman/uuid",
+			"revision": "e790cca94e6cc75c7064b1332e63811d4aae1a53",
+			"revisionTime": "2017-06-12T15:36:48Z"
+		}
+	],
+	"rootPath": "server/oauth"
+}

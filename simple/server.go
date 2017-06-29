@@ -28,9 +28,7 @@ type Opts struct {
 
 func Start(opts Opts, term terminator.Isync, debug *log.Logger) {
 	term.Add(1)
-	if debug != nil {
-		dbg = debug
-	}
+	dbgInit(debug)
 	start := termChan.New()
 	go run(opts, start, term)
 	<-start.Chan()
@@ -127,6 +125,11 @@ var dbg *log.Logger = debugNull()
 
 type nullog struct{}
 
+func dbgInit(debug *log.Logger) {
+	if debug != nil {
+		dbg = debug
+	}
+}
 func (*nullog) Write(p []byte) (int, error) {
 	return len(p), nil
 }

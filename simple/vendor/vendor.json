@@ -1,0 +1,19 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "ylkVQq0hYr4J8kOhUJ1u9AbFZrY=",
+			"path": "github.com/WhisperingChaos/termChan",
+			"revision": "dc7162996cba25fe374a060a6adb666e74eec856",
+			"revisionTime": "2017-05-02T02:26:22Z"
+		},
+		{
+			"checksumSHA1": "kKKbY4j5CPqs3Efl7KYvbB22elI=",
+			"path": "github.com/WhisperingChaos/terminator",
+			"revision": "341298b1e724becc7ee5dba93f31d6f627359a61",
+			"revisionTime": "2017-04-26T16:04:33Z"
+		}
+	],
+	"rootPath": "server/simple"
+}

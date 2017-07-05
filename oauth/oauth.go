@@ -17,7 +17,6 @@ type Opts struct {
 }
 
 func Start(opts Opts, term terminator.Isync, debug *log.Logger) {
-	term.Add(1)
 	dbgInit(debug)
 	dbg.Println("oauth server configure handlers start")
 	oasvr := oauthServerConfig(opts.TokenExpireInterval)

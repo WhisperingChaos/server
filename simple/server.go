@@ -29,7 +29,7 @@ type Opts struct {
 
 func Start(opts Opts, term terminator.Isync, debug *log.Logger) {
 	term.Add(1)
-	dbgInit(debug)
+	//	dbgInit(debug)
 	start := termChan.New()
 	go run(opts, start, term)
 	<-start.Chan()

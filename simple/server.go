@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"sync"
 
 	"github.com/WhisperingChaos/termChan"
 
@@ -72,6 +73,7 @@ func optCheck(opts *Opts) {
 func manageNewServers(opts Opts) (start func(), shutdown func()) {
 	var serverTLS *http.Server
 	var serverHttp *http.Server
+	var lck sync.Mutex
 	start = func() {
 		mux := http.NewServeMux()
 		for _, rth := range opts.Routes {
@@ -83,9 +85,12 @@ func manageNewServers(opts Opts) (start func(), shutdown func()) {
 			<-startHTTP.Chan()
 			close(startHTTP.Chan())
 			var url = opts.RootURL + ":" + strconv.Itoa(int(opts.Port))
-			serverHttp = &http.Server{Handler: mux, Addr: url}
+			lserverHttp := &http.Server{Handler: mux, Addr: url}
+			lck.Lock()
+			serverHttp = lserverHttp
+			lck.Unlock()
 			dbg.Println("Started HTTP listner on:" + url)
-			serverHttp.ListenAndServe()
+			lserverHttp.ListenAndServe()
 		}()
 		startHTTP.Chan() <- true
 		<-startHTTP.Chan()
@@ -97,20 +102,25 @@ func manageNewServers(opts Opts) (start func(), shutdown func()) {
 			<-startTLS.Chan()
 			close(startTLS.Chan())
 			var urlTLS = opts.RootURL + ":" + strconv.Itoa(int(opts.PortTLS))
-			serverTLS = &http.Server{
+			lserverTLS := &http.Server{
 				TLSConfig: &tls.Config{
 					ClientAuth: opts.ClientAuth,
 				},
 				Addr:    urlTLS,
 				Handler: mux,
 			}
+			lck.Lock()
+			serverTLS = lserverTLS
+			lck.Unlock()
 			dbg.Println("Started HTTPS listner on: " + urlTLS)
-			serverTLS.ListenAndServeTLS(opts.CertPath, opts.KeyPath)
+			lserverTLS.ListenAndServeTLS(opts.CertPath, opts.KeyPath)
 		}()
 		startTLS.Chan() <- true
 		<-startTLS.Chan()
 	}
 	shutdown = func() {
+		lck.Lock()
+		defer lck.Unlock()
 		if serverHttp != nil {
 			serverHttp.Shutdown(nil)
 		}

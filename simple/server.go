@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"crypto/tls"
 	"log"
 	"net/http"
@@ -122,10 +123,10 @@ func manageNewServers(opts Opts) (start func(), shutdown func()) {
 		lck.Lock()
 		defer lck.Unlock()
 		if serverHttp != nil {
-			serverHttp.Shutdown(nil)
+			serverHttp.Shutdown(context.TODO())
 		}
 		if serverTLS != nil {
-			serverTLS.Shutdown(nil)
+			serverTLS.Shutdown(context.TODO())
 		}
 	}
 	return
